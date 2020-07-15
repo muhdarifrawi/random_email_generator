@@ -19,8 +19,13 @@
             Welcome to random email generator. Click on the "Generate" button to load the randomiser.
         </p>
         <div class="input-group">
-            <input type="text" class="form-control mr-3 col-2"></input>
-            <button type="button" class="btn btn-primary">Generate</button>
+            <form method="POST">
+            <input type="text" class="form-control mb-3" placeholder="Number of emails" name="number"></input>
+            <button type="submit" class="btn btn-primary">Generate</button>
+            </form>
+        </div>
+        <div>
+            {{numberOfEmails}}
         </div>
     </div>
 
