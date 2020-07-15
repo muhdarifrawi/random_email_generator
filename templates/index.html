@@ -25,7 +25,15 @@
             </form>
         </div>
         <div>
-            {{numberOfEmails}}
+            {% if numberOfEmails != "Enter a number between 1 to 999." %}
+            <ul>
+            {% for each in numberOfEmails%}
+            <li>{{each}}</li>
+            {% endfor %}
+            {% else %}
+            <p>{{numberOfEmails}}</p>
+            {% endif %}
+            </ul>
         </div>
     </div>
 
