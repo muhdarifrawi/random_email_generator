@@ -5,13 +5,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_page():
+    
     return render_template("index.html")
 
 @app.route('/', methods=["POST"])
 def generate_email():
-    number_of_emails = int(request.form["number"])
-
-
+    number_of_emails = request.form["number"]
+    
     animals = ["antelope", "bat", "cat", "dog", "elephant", "fox", "giraffe", "hippopotamus", "impala",
             "jaguar", "kangaroo", "lemur", "monkey", "narwhal", "ostrich", "panda", "quail", "rooster", "snake",
             "tortoise",
