@@ -17,7 +17,8 @@ def main_page():
 
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
-        cw.writerow(email_collection)
+        for each in email_collection:
+            cw.writerow([each])
         output = make_response(si.getvalue())
         output.headers["Content-Disposition"] = "attachment; filename=export.csv"
         output.headers["Content-type"] = "text/csv"
