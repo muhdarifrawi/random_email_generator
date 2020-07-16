@@ -1,10 +1,28 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, make_response
 import random
+from io import BytesIO as StringIO
+import csv
 
 app = Flask(__name__)
 
+email_collection = []
+
 @app.route('/')
 def main_page():
+
+    download = request.args.get("download")
+
+    if download == "true":
+        print(email_collection)
+
+        si = StringIO()
+        cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
+        cw.writerow(email_collection)
+        output = make_response(si.getvalue())
+        output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+        output.headers["Content-type"] = "text/csv"
+        
+        return output
     
     return render_template("index.html")
 
@@ -27,7 +45,7 @@ def generate_email():
     email = str(animal) + str(fruit) + "@asd.com"
 
     counter = 0
-    email_collection = []
+    
     
 
     # print(email_collection)
@@ -48,3 +66,5 @@ def generate_email():
     else:
         
         return render_template("index.html", numberOfEmails="Enter a number between 1 to 999.")
+
+    
