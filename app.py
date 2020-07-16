@@ -10,7 +10,7 @@ def main_page():
 
 @app.route('/', methods=["POST"])
 def generate_email():
-    number_of_emails = request.form["number"]
+    number_of_emails = int(request.form["number"])
     
     animals = ["antelope", "bat", "cat", "dog", "elephant", "fox", "giraffe", "hippopotamus", "impala",
             "jaguar", "kangaroo", "lemur", "monkey", "narwhal", "ostrich", "panda", "quail", "rooster", "snake",
