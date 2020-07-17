@@ -11,8 +11,10 @@ class info:
     phone_collection = []
 
 def random_phone_generator():
-    hp = ""
-    for each in range(8):
+    first_number = random.randint(6,9)
+    first_number = str(first_number)
+    hp = first_number
+    for each in range(7):
         number = random.randint(0,9)
         number = str(number)
         hp = hp + number
@@ -27,9 +29,10 @@ def main_page():
 
         info.email_collection.insert(0, "email")
         info.name_collection.insert(0, "name")
+        info.phone_collection.insert(0, "phone no.")
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
-        rows = zip(info.email_collection, info.name_collection)
+        rows = zip(info.email_collection, info.name_collection, info.phone_collection)
         for each in rows:
             cw.writerow(each)
         output = make_response(si.getvalue())
