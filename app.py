@@ -5,8 +5,9 @@ import csv
 
 app = Flask(__name__)
 
-email_collection = []
-name_collection= []
+class info:
+    email_collection = []
+    name_collection= []
 
 @app.route('/')
 def main_page():
@@ -15,10 +16,10 @@ def main_page():
 
     if download == "true":
 
-        email_collection.insert(0, "email")
+        info.email_collection.insert(0, "email")
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
-        for each in email_collection:
+        for each in info.email_collection:
             cw.writerow([each])
         output = make_response(si.getvalue())
         output.headers["Content-Disposition"] = "attachment; filename=export.csv"
@@ -51,20 +52,20 @@ def generate_email():
     if (number_of_emails>0 and number_of_emails < 1000):
        
         #error resolved
-        if len(email_collection) != 0:
-            del email_collection[:]
-            del name_collection[:]
+        if len(info.email_collection) != 0:
+            del info.email_collection[:]
+            del info.name_collection[:]
 
         while counter < number_of_emails:
             animal = random.choice(animals)
             fruit = random.choice(fruits)
             email = str(animal) + str(fruit) + "@asd.com"
             name = str(animal) + " " + str(fruit)
-            name_collection.append(name)
-            email_collection.append(email)
+            info.name_collection.append(name)
+            info.email_collection.append(email)
             counter += 1
 
-        return render_template("index.html", numberOfEmails=email_collection, numberOfNames=name_collection)
+        return render_template("index.html", numberOfEmails=info.email_collection, numberOfNames=info.name_collection)
     
     else:
         
