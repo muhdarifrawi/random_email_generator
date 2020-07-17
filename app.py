@@ -17,10 +17,12 @@ def main_page():
     if download == "true":
 
         info.email_collection.insert(0, "email")
+        info.name_collection.insert(0, "name")
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
-        for each in info.email_collection:
-            cw.writerow([each])
+        rows = zip(info.email_collection, info.name_collection)
+        for each in rows:
+            cw.writerow(each)
         output = make_response(si.getvalue())
         output.headers["Content-Disposition"] = "attachment; filename=export.csv"
         output.headers["Content-type"] = "text/csv"
@@ -38,7 +40,7 @@ def generate_email():
             "tortoise",
             "urchin", "vulture", "whale", "xeme", "yak", "zebra"]
 
-    fruits = ["apple", "banana", "ciku", "durian", "elderberry", "fig", "grape", "huckleberry", "ice apple", "jackfruit",
+    fruits = ["apple", "banana", "ciku", "durian", "elderberry", "fig", "grape", "huckleberry", "ice-apple", "jackfruit",
             "kiwi", "lime", "melon", "orange", "pumpkin", "quince", "raspberry", "strawberry", "tangerine", "ugli",
             "voavanga",
             "watermelon", "yam", "zuchinni"]
