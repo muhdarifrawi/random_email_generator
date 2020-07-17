@@ -6,6 +6,7 @@ import csv
 app = Flask(__name__)
 
 email_collection = []
+name_collection= []
 
 @app.route('/')
 def main_page():
@@ -52,15 +53,18 @@ def generate_email():
         #error resolved
         if len(email_collection) != 0:
             del email_collection[:]
+            del name_collection[:]
 
         while counter < number_of_emails:
             animal = random.choice(animals)
             fruit = random.choice(fruits)
             email = str(animal) + str(fruit) + "@asd.com"
+            name = str(animal) + " " + str(fruit)
+            name_collection.append(name)
             email_collection.append(email)
             counter += 1
 
-        return render_template("index.html", numberOfEmails=email_collection)
+        return render_template("index.html", numberOfEmails=email_collection, numberOfNames=name_collection)
     
     else:
         
