@@ -26,7 +26,8 @@
             <a href="?download=true">download</a>
         </div>
         <div>
-            <table class="table">
+          {% if numberOfEmails != "Enter a number between 1 to 999." %}
+            <table class="table mt-3">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -44,22 +45,23 @@
                 </tr>
                 {% endfor %}
               </tbody>
-            <!-- {% if numberOfEmails != "Enter a number between 1 to 999." %}
-            <ul>
-            {% for each in numberOfEmails%}
-            <li>{{each}}</li>
-            {% endfor %}
             {% else %}
-            <p>{{numberOfEmails}}</p>
+            
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">email</th>
+                  
+                </tr>
+              </thead>
+            </table>
+            <div class="alert alert-danger" role="alert">
+              {{numberOfEmails}}
+            </div>
+
             {% endif %}
-            </ul>
-            {% if numberOfEmails != "Enter a number between 1 to 999." %}
-            <ul>
-            {% for each in numberOfNames%}
-            <li>{{each}}</li>
-            {% endfor %}
-            {% endif %}
-            </ul> -->
+            
             <table>
         </div>
     </div>
