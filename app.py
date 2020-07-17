@@ -69,6 +69,7 @@ def generate_email():
         if len(info.email_collection) != 0:
             del info.email_collection[:]
             del info.name_collection[:]
+            del info.phone_collection[:]
 
         while counter < number_of_emails:
             animal = random.choice(animals)
