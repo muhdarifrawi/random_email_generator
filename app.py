@@ -14,6 +14,7 @@ def main_page():
 
     if download == "true":
 
+        email_collection.insert(0, "email")
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
         for each in email_collection:
@@ -48,7 +49,7 @@ def generate_email():
     
     if (number_of_emails>0 and number_of_emails < 1000):
        
-        # this causes error zzzzzzz
+        #error resolved
         if len(email_collection) != 0:
             del email_collection[:]
 
