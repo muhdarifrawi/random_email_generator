@@ -7,7 +7,16 @@ app = Flask(__name__)
 
 class info:
     email_collection = []
-    name_collection= []
+    name_collection = []
+    phone_collection = []
+
+def random_phone_generator():
+    hp = ""
+    for each in range(8):
+        number = random.randint(0,9)
+        number = str(number)
+        hp = hp + number
+    return hp
 
 @app.route('/')
 def main_page():
@@ -63,11 +72,14 @@ def generate_email():
             fruit = random.choice(fruits)
             email = str(animal) + str(fruit) + "@asd.com"
             name = str(animal) + " " + str(fruit)
+            phone = random_phone_generator()
             info.name_collection.append(name)
             info.email_collection.append(email)
+            info.phone_collection.append(phone)
             counter += 1
 
-        return render_template("index.html", numberOfEmails=info.email_collection, numberOfNames=info.name_collection, isGenerated=True)
+        return render_template("index.html", numberOfEmails=info.email_collection, 
+        numberOfNames=info.name_collection, numberOfPhones=info.phone_collection ,isGenerated=True)
     
     else:
         
