@@ -65,7 +65,7 @@ def generate_email():
             info.email_collection.append(email)
             counter += 1
 
-        return render_template("index.html", numberOfEmails=info.email_collection, numberOfNames=info.name_collection)
+        return render_template("index.html", numberOfEmails=info.email_collection, numberOfNames=info.name_collection, isGenerated=True)
     
     else:
         
