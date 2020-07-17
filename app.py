@@ -13,7 +13,6 @@ def main_page():
     download = request.args.get("download")
 
     if download == "true":
-        print(email_collection)
 
         si = StringIO()
         cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
@@ -47,14 +46,12 @@ def generate_email():
 
     counter = 0
     
-    
-
-    # print(email_collection)
-    # print(len(email_collection))
-
-    
     if (number_of_emails>0 and number_of_emails < 1000):
-        
+       
+        # this causes error zzzzzzz
+        if len(email_collection) != 0:
+            del email_collection[:]
+
         while counter < number_of_emails:
             animal = random.choice(animals)
             fruit = random.choice(fruits)
