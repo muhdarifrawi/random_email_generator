@@ -2,6 +2,18 @@ from flask import Flask, render_template, request, url_for, make_response
 import random
 from io import BytesIO as StringIO
 import csv
+# this three lines are for python-dotenv
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+import pymongo
+
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB = os.getenv("MONGO_DB")
+MONGO_COLL = os.getenv("MONGO_COLL")
+
+conn =  pymongo.MongoClient(MONGO_URI)
 
 app = Flask(__name__)
 
@@ -23,25 +35,24 @@ def random_phone_generator():
 @app.route('/')
 def main_page():
 
+    data = conn[MONGO_DB][MONGO_COLL]
+    
+
     download = request.args.get("download")
 
     if download == "true":
+        for each in range(len(info.email_collection)):
+            data.insert(
+               {
+                "name": info.name_collection[each],
+                "email":info.email_collection[each],
+                "phone_number": info.phone_collection[each]
+               }
+            )
 
-        info.email_collection.insert(0, "email")
-        info.name_collection.insert(0, "name")
-        info.phone_collection.insert(0, "phone no.")
-        si = StringIO()
-        cw = csv.writer(si, quoting=csv.QUOTE_NONNUMERIC)
-        rows = zip(info.email_collection, info.name_collection, info.phone_collection)
-        for each in rows:
-            cw.writerow(each)
-        output = make_response(si.getvalue())
-        output.headers["Content-Disposition"] = "attachment; filename=export.csv"
-        output.headers["Content-type"] = "text/csv"
         
-        return output
     
-    return render_template("index.html")
+    return render_template("index.html",data=data)
 
 @app.route('/', methods=["POST"])
 def generate_email():
