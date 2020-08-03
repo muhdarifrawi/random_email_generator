@@ -41,6 +41,8 @@ def main_page():
     download = request.args.get("download")
 
     if download == "true":
+        data.remove({})
+
         for each in range(len(info.email_collection)):
             data.insert(
                {
