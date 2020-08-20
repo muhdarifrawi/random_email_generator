@@ -36,33 +36,9 @@ def random_phone_generator():
 @app.route('/')
 def main_page():
 
-    data = conn[MONGO_DB][MONGO_COLL]
     
-
-    download = request.args.get("download")
-
-    if download == "true":
-        data.remove({})
-
-        for each in range(len(info.email_collection)):
-            data.insert(
-               {
-                "name": info.name_collection[each],
-                "email":info.email_collection[each],
-                "phone_number": info.phone_collection[each]
-               }
-            )
-        with open("test-file","w") as file:
-            write_file = csv.writer(file)
-            export_data = data.find()
-            for each in export_data:
-                write_file.writerow([each.name,each.email,each.phone_number])
-
-            output = make_response(StringIO().getvalue())
-            output.headers["Content-Disposition"] = "attachment; filename=export.csv"
-            output.headers["Content-type"] = "text/csv"
     
-    return render_template("index.html",data=data)
+    return render_template("index.html")
 
 @app.route('/', methods=["POST"])
 def generate_email():
