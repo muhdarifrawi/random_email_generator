@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import pymongo
+import csv
 
 MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DB = os.getenv("MONGO_DB")
@@ -51,8 +52,15 @@ def main_page():
                 "phone_number": info.phone_collection[each]
                }
             )
+        with open("test-file","w") as file:
+            write_file = csv.writer(file)
+            export_data = data.find()
+            for each in export_data:
+                write_file.writerow([each.name,each.email,each.phone_number])
 
-        
+            output = make_response(StringIO().getvalue())
+            output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+            output.headers["Content-type"] = "text/csv"
     
     return render_template("index.html",data=data)
 
